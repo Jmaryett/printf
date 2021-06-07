@@ -89,10 +89,10 @@ int ft_printf(const char *format, ...)
 	return (len);
 }
 
-int main()
+/* int main()
 {
 	int	len;
-	len = ft_printf(" %*.s %.1s ", 10, "123", "4567");
+	len = ft_printf(" %*.3s %.3s ", 10, "123", "4567");
 	write(1, "\n", 1);
 	printf("length = %d", len);
-}
+} */

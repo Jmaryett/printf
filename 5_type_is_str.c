@@ -1,55 +1,96 @@
 #include "ft_printf.h"
 
-int	minus_one(char *str, t_flags *flagi)
+/* static int	handle_minus(char *s, t_flags *flagi)
 {
+	int	i;
 	int len;
 
-	len = 0;
-	if (flagi->accuracy >= 0)
-		{
-			len = len + ft_putstr(str, flagi);
-			while(flagi->width > 0)
-			{
-				ft_putchar(' ');
-				flagi->width--;
-				len++;
-			}
-		}
+	i = -1;
+	len = ft_strlen(s);
+	if (flagi->accuracy > -1 && flagi->accuracy < len)
+		while (++i < flagi->accuracy)
+			ft_putchar(s[i]);
 	else
-		{
-			len = len + ft_putstr(str, flagi);
-			while(flagi->width > (int)ft_strlen(str))
-			{
-				ft_putchar(' ');
-				flagi->width--;
-				len++;
-			}
-		}
-	return (len);
+		while (++i < len)
+			ft_putchar(s[i]);
+	while (i < flagi->width)
+	{
+		ft_putchar(' ');
+		i++;
+	}
+	return (i);
 }
 
-/* int	check_acc_str(t_flags *flagi, int len, char *str)
+static int	handle_no_minus(char *str, t_flags *flagi)
 {
-	if (flagi->accuracy > 0 && flagi->width > 0)
-	{
-		while (flagi->width > flagi->accuracy)
+	int		len;
+	int		i;
+	int		len_output;
+	int		total_writen;
+
+	i = -1;
+	total_writen = 0;
+	len = ft_strlen(str);
+	if (flagi->accuracy < len && flagi->accuracy > -1)
+		len_output = flagi->accuracy;
+	else
+		len_output = len;
+	if (flagi->width > len_output)
+		while (++i < flagi->width - len_output)
 		{
 			ft_putchar(' ');
-			flagi->width--;
-			len++;	
+			total_writen++;
 		}
-	}
-	 if (flagi->accuracy < 0 || !flagi->accuracy)
+	i = -1;
+	while (++i < len_output)
 	{
-		while (flagi->width > 0 (int)ft_strlen(str))
+		ft_putchar(str[i]);
+		total_writen++;
+	}
+	return (total_writen);
+} */
+
+int	minus_one(char *str, t_flags *flagi)
+{
+	int	len;
+
+	len = ft_strlen(str);
+	if (flagi->accuracy >= 0)
+	{
+		len = ft_putstr(str, flagi);
+		while(flagi->width > len)
 		{
 			ft_putchar(' ');
 			flagi->width--;
 			len++;
 		}
+		return (len);
 	}
+	else
+		len = ft_putstr(str, flagi);
 	return (len);
-} */
+}
+
+int	no_minus(char *s, t_flags *flagi)
+{
+	int	len;
+
+	len = ft_strlen(s);
+	if (flagi->accuracy >= 0)
+	{
+		while(flagi->width > len)
+		{
+			ft_putchar(' ');
+			flagi->width--;
+			len++;
+		}
+		len = len + ft_putstr(s, flagi);
+		return (len);
+	}
+	else
+		len = ft_putstr(s, flagi);
+	return (len);
+}
 
 int	process_string(char *str, t_flags *flagi)
 {
@@ -57,39 +98,19 @@ int	process_string(char *str, t_flags *flagi)
 
 	len = 0;
 	if (!str)
-		write(1, NULL, 1);
+		str = "(null)";
 	if (flagi->accuracy >= 0 && flagi->accuracy > (int)ft_strlen(str))
 		flagi->accuracy = ft_strlen(str);
 	if (flagi->minus == 1)
-	{
 		len = len + minus_one(str, flagi);
+	else
+		len = len + no_minus(str, flagi);
+	/* if (flagi->minus == 1)
+	{
+		len = len + handle_minus(str, flagi);
 		return (len);
 	}
-	//len = check_acc_str(flagi, len, str);
-	if (flagi->minus == 0)
-	{
-		if (flagi->accuracy < 0 && flagi->width > 0)
-		{
-			while(flagi->width-- > (int)ft_strlen(str))
-			{
-				ft_putchar(' ');
-				len++;
-			}
-			len = len + ft_putstr(str, flagi);
-			return (len);
-		}
-		else if (flagi->accuracy >= 0) /* && flagi->accuracy > (int)ft_strlen(str)) */
-		{
-			while(flagi->width > (int)ft_strlen(str))
-			{
-				ft_putchar(' ');
-				flagi->width--;
-				len++;
-			}
-			len = len + ft_putstr(str, flagi);
-			return (len);
-		}
-	}
-	len = len + ft_putstr(str, flagi);
+	else
+		len = handle_no_minus(str, flagi); */
 	return (len);
 }

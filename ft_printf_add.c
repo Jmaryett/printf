@@ -22,7 +22,7 @@ int	ft_putstr(char *s, t_flags *flagi)
 
 	len = 0;
 	i = 0;
-	if (flagi->accuracy < 0)
+	/* if (flagi->accuracy < 0)
 	{
 		while(s[i])
 		{
@@ -31,7 +31,7 @@ int	ft_putstr(char *s, t_flags *flagi)
 			len++;
 		}
 		return(len);
-	}
+	} */
 	while (s[i] && i < flagi->accuracy) //or <= ?? or || ??
 	{
 		write(1, &s[i], 1);
