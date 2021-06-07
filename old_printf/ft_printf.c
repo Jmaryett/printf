@@ -39,11 +39,17 @@ static int	parse_t_flags(char *format, int i, t_flags *flagi, va_list arguments)
 	return (i);
 }
 
-static int thx_norms(char *format, va_list arguments, int i, int length, t_flags *flagi)
+static int	parse_input(char *format, va_list arguments)
 {
+	int	length;
+	int	i;
+	t_flags	flagi;
+
+	i = 0;
+	length = 0;
 	while (format[i])
 	{
-		init_t_flags(flagi);
+		init_t_flags(&flagi);
 		if (format[i] == '%')
 			{
 				while (format[++i] == ' ')
@@ -51,9 +57,9 @@ static int thx_norms(char *format, va_list arguments, int i, int length, t_flags
 						ft_putchar(' '); 
 						length++;
 					}
-				i = parse_t_flags(format, i, flagi, arguments);
-				if (flagi->type != 'o')
-						length = length + process_types(format[i], flagi, arguments/* , length */);
+				i = parse_t_flags(format, i, &flagi, arguments);
+				if (flagi.type != 'o')
+						length = length + process_types(format[i], &flagi, arguments/* , length */);
 			}
 		else if (format[i] != '%')
 		{	
@@ -65,21 +71,9 @@ static int thx_norms(char *format, va_list arguments, int i, int length, t_flags
 	return (length);
 }
 
-static int	parse_input(char *format, va_list arguments)
-{
-	int		length;
-	int		i;
-	t_flags	flagi;
-
-	i = 0;
-	length = 0;
-	length = thx_norms(format, arguments, i, length, &flagi);
-	return (length);
-}
-
 int ft_printf(const char *format, ...)
 {
-	int		len;
+	int	len;
 	va_list	arguments;
 
 	len = 0;
@@ -92,7 +86,7 @@ int ft_printf(const char *format, ...)
 int main()
 {
 	int	len;
-	len = ft_printf(" %*.s %.1s ", 10, "123", "4567");
+	len = ft_printf("%*c%*c", -10, '0', 10, '1');
 	write(1, "\n", 1);
 	printf("length = %d", len);
 }
