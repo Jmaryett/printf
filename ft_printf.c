@@ -85,8 +85,9 @@ int ft_printf(const char *format, ...)
 	va_end(arguments);
 	return (len);
 }
+hjhj
 
-/* int main()
+	/* int main()
 {
 	int len;
 	int p;
