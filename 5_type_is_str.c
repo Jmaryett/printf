@@ -19,14 +19,14 @@
 		i++;
 	}
 	return (i);
-}
+} */
 
-static int	handle_no_minus(char *str, t_flags *flagi)
+static int handle_no_minus(char *str, t_flags *flagi)
 {
-	int		len;
-	int		i;
-	int		len_output;
-	int		total_writen;
+	int len;
+	int i;
+	int len_output;
+	int total_writen;
 
 	i = -1;
 	total_writen = 0;
@@ -48,53 +48,38 @@ static int	handle_no_minus(char *str, t_flags *flagi)
 		total_writen++;
 	}
 	return (total_writen);
-} */
+}
 
-int	minus_one(char *str, t_flags *flagi)
+int minus_one(char *str, t_flags *flagi)
 {
-	int	len;
+	int len;
 
 	len = ft_strlen(str);
 	if (flagi->accuracy >= 0)
 	{
 		len = ft_putstr(str, flagi);
-		while(flagi->width > len)
+		while (len < flagi->width)
 		{
 			ft_putchar(' ');
-			flagi->width--;
 			len++;
 		}
 		return (len);
 	}
 	else
-		len = ft_putstr(str, flagi);
-	return (len);
-}
-
-int	no_minus(char *s, t_flags *flagi)
-{
-	int	len;
-
-	len = ft_strlen(s);
-	if (flagi->accuracy >= 0)
 	{
-		while(flagi->width > len)
+		len = 0 + ft_putstr(str, flagi);
+		while (len < flagi->width)
 		{
 			ft_putchar(' ');
-			flagi->width--;
 			len++;
 		}
-		len = len + ft_putstr(s, flagi);
-		return (len);
 	}
-	else
-		len = ft_putstr(s, flagi);
 	return (len);
 }
 
-int	process_string(char *str, t_flags *flagi)
+int process_string(char *str, t_flags *flagi)
 {
-	int	len;
+	int len;
 
 	len = 0;
 	if (!str)
@@ -104,13 +89,6 @@ int	process_string(char *str, t_flags *flagi)
 	if (flagi->minus == 1)
 		len = len + minus_one(str, flagi);
 	else
-		len = len + no_minus(str, flagi);
-	/* if (flagi->minus == 1)
-	{
-		len = len + handle_minus(str, flagi);
-		return (len);
-	}
-	else
-		len = handle_no_minus(str, flagi); */
+		len = len + handle_no_minus(str, flagi);
 	return (len);
 }
