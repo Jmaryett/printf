@@ -9,6 +9,7 @@ SRCS	= ft_printf.c \
 		3_analyze_type.c \
 		4_type_is_char.c \
 		5_type_is_str.c \
+		6_type_is_pointer.c \
 
 OBJS	= ${SRCS:.c=.o}
 

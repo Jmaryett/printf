@@ -85,15 +85,14 @@ int ft_printf(const char *format, ...)
 	va_end(arguments);
 	return (len);
 }
-hjhj
 
-	/* int main()
+int main()
 {
 	int len;
 	int p;
-	len = ft_printf(" %-3.s ", NULL);
+	len = ft_printf(" %p ", 17);
 	write(1, "\n", 1);
 	printf("My length = %d\n", len);
-	p = printf(" %-3.s ", NULL);
+	p = printf(" %p ", 17);
 	printf("\nLen that should be = %d", p);
-} */
+}

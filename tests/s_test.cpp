@@ -10,7 +10,7 @@ extern "C"
 #include "print.hpp"
 
 #ifdef __unix__
-#define TEST_LIMIT 33
+#define TEST_LIMIT 36
 #endif
 #ifdef __APPLE__
 #define TEST_LIMIT 36
