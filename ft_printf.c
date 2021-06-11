@@ -85,14 +85,3 @@ int ft_printf(const char *format, ...)
 	va_end(arguments);
 	return (len);
 }
-
-/* int main()
-{
-	int len;
-	int p;
-	len = ft_printf("%p", 0);
-	write(1, "\n", 1);
-	printf("My length = %d\n", len);
-	p = printf("%p", 0);
-	printf("\nLen that should be = %d", p);
-} */

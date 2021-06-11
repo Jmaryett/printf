@@ -36,7 +36,7 @@ int minus_one(char *str, t_flags *flagi)
 	len = ft_strlen(str);
 	if (flagi->accuracy >= 0)
 	{
-		len = ft_putstr(str, flagi);
+		len = my_putstr(str, flagi);
 		while (len < flagi->width)
 		{
 			ft_putchar(' ');
@@ -46,7 +46,7 @@ int minus_one(char *str, t_flags *flagi)
 	}
 	else
 	{
-		len = 0 + ft_putstr(str, flagi);
+		len = 0 + my_putstr(str, flagi);
 		while (len < flagi->width)
 		{
 			ft_putchar(' ');

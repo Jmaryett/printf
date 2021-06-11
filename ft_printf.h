@@ -6,7 +6,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "libft.h"
+#include "libft/libft.h"
 
 typedef struct s_list
 {
@@ -35,11 +35,13 @@ int process_char(char c, t_flags *flagi /* , int len */);
 int process_string(char *str, t_flags *flagi);
 int process_pointer(unsigned long adress, t_flags *flagi);
 int process_integer(int nb, t_flags *flagi);
-
+int adding_width(t_flags *flagi, int str_len);
+int my_putstr_for_int(char *s, t_flags *flagi, int str_len);
+int minus_one_for_int(char *str, t_flags *flagi);
 //char *ft_strjoin(char const *s1, char const *s2);
 //size_t ft_strlen(const char *str);
 int minus_one(char *str, t_flags *flagi);
-int minus_one_with_zero(char *str, t_flags *flagi);
+int minus_one_with_zero(char *str, t_flags *flagi, int str_len);
 int no_minus_with_zero(char *str, t_flags *flagi);
 int handle_no_minus(char *str, t_flags *flagi);
 void ft_putchar(char c);

@@ -2,28 +2,96 @@
 
 int process_integer(int nb, t_flags *flagi)
 {
-	int buf_nb; //???
+	//int buf_nb; //???
 	char *str;
 	int len;
+	int str_len;
 
 	len = 0;
-	buf_nb = nb; //????
-	if (nb == 0 || flagi->accuracy == 0)
-	{
-		while (len < flagi->width)
-		{
-			ft_putchar(' ');
-			len++;
-		}
-		return (len);
-	}															  //is it even needed???
+	//buf_nb = nb; //????
+	if (nb == 0 && flagi->accuracy == 0)
+		len = len + adding_width(flagi, 0);						  //is it even needed???
 	else if (nb < 0 && (flagi->accuracy < 0 || flagi->zero == 1)) //not sure about 2 condition
 	{
-		if (flagi->zero == 1 && flagi->accuracy < 0 && nb > -2147483648)
-			len = my_putstr("-", flagi); //needed????
-		else if (nb = -2147483648)
-			len--; //maybe that is not needed also
 		nb = nb * (-1);
+		flagi->zero = 1;
+		flagi->width--;
+		len++;
+	}
+	if (nb < 0 && flagi->accuracy >= 0)
+	{
+		ft_putchar('-');
+		nb *= -1;
+		len++;
+	}
+	str = ft_itoa(nb);
+	str_len = ft_strlen(str);
+	if (flagi->minus == 1)
+	{
+		if (flagi->accuracy >= 0)
+		{
+			if (flagi->zero == 1)
+				len = len + minus_one_with_zero(str, flagi, str_len);
+			else if (flagi->zero == 0)
+				len = len + minus_one_for_int(str, flagi);
+			free(str);
+			return (len);
+		}
+		else
+		{
+			flagi->accuracy--;
+			str_len--;
+			flagi->zero = 1;
+			len = len + adding_width(flagi, str_len);
+		}
+	}
+	else
+		len = len + my_putstr_for_int(str, flagi, str_len);
+	if (flagi->accuracy >= 0 && flagi->accuracy < str_len) //here width instead of acc???
+		flagi->accuracy = str_len;
+	if (flagi->accuracy >= 0)
+	{
+		flagi->width = flagi->width - flagi->accuracy;
+		len = len + adding_width(flagi, str_len);
+	}
+	else if (flagi->accuracy < 0)
+	{
+		flagi->zero = 1;
+		len = len + adding_width(flagi, str_len);
+	}
+	if (flagi->minus == 0)
+	{
+		if (flagi->accuracy >= 0)
+		{
+			flagi->accuracy--;
+			str_len--;
+			flagi->zero = 1;
+			len = len + adding_width(flagi, str_len);
+		}
+	}
+	else
+		len = len + my_putstr_for_int(str, flagi, str_len);
+	free(str);
+	return (len);
+}
+
+/* int process_integer(int nb, t_flags *flagi)
+{
+	char *str;
+	int str_len;
+	int len;
+	int buf_nb = nb;
+
+	len = 0;
+	if (flagi->accuracy == 0 && nb == 0)
+		len = len + adding_width(flagi, 0);
+	else if (nb < 0 && (flagi->accuracy < 0 || flagi->zero == 1))
+	{
+		if (flagi->zero == 1 && flagi->accuracy < 0 && nb > -2147483647)
+			len = len + my_putstr_for_int("-", flagi, 1);
+		else if (nb == -2147483648)
+			len--;
+		nb *= (-1);
 		flagi->zero = 1;
 		flagi->width--;
 		len++;
@@ -31,55 +99,41 @@ int process_integer(int nb, t_flags *flagi)
 	str = ft_itoa(nb);
 	if (flagi->minus == 1)
 	{
-		if (buf_nb < 0 && flagi->accuracy >= 0 && nb > 2147483648)
+		if (nb < 0 && flagi->accuracy >= 0 && buf_nb > 2147483648)
 			ft_putchar('-');
-		if (flagi->accuracy >= 0 && flagi->zero == 1)
-			len = len + minus_one_with_zero(str, flagi);
-		else if (flagi->accuracy >= 0 && flagi->zero == 0)
-			len = len + minus_one(str, flagi);
-		else
-			len = len + my_putstr(str, flagi);
-	}
-	if (flagi->width >= 0 && flagi->accuracy < (int)ft_strlen(str)) //here width instead of acc???
-		flagi->accuracy = (int)ft_strlen(str);
-	if (flagi->accuracy >= 0)
-	{
-		flagi->width = flagi->width - flagi->accuracy;
-		while (flagi->width)
+		if (flagi->accuracy >= 0)
 		{
-			ft_putchar(' ');
-			flagi->width--;
-			len++;
+			flagi->accuracy--;
+			str_len--;
+			flagi->zero = 1;
+			len = len + adding_width(flagi, str_len);
 		}
+		len = len + my_putstr_for_int(str, flagi, str_len);
+	}
+	else if (flagi->accuracy >= 0 && flagi->accuracy < str_len)
+		flagi->accuracy = str_len;
+	else if (flagi->accuracy >= 0)
+	{
+		flagi->width -= flagi->accuracy;
+		len = len + adding_width(flagi, str_len);
 	}
 	else if (flagi->accuracy < 0)
 	{
-		if (flagi->zero == 1)
-		{
-			while (flagi->width != (int)ft_strlen(str))
-			{
-				ft_putchar('0');
-				flagi->width--;
-				len++;
-			}
-		}
-		else
-		{
-			while (flagi->width != (int)ft_strlen(str))
-			{
-				ft_putchar(' ');
-				flagi->width--;
-				len++;
-			}
-		}
+		flagi->zero = 1;
+		len = len + adding_width(flagi, str_len);
 	}
 	if (flagi->minus == 0)
 	{
 		if (buf_nb < 0 && flagi->accuracy >= 0 && nb > 2147483648)
 			ft_putchar('-');
-		else
+		else if (flagi->accuracy >= 0)
 		{
-			if (flagi->accuracy >= 0)
+			flagi->accuracy--;
+			str_len--;
+			flagi->zero = 1;
+			len = len + adding_width(flagi, str_len);
 		}
+		len = len + my_putstr_for_int(str, flagi, str_len);
 	}
-}
+	free(str);
+	return (len); */
