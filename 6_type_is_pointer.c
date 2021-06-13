@@ -24,6 +24,8 @@ static char *adress_not_zero(unsigned long adress, int count)
 		count++;
 	}
 	str = malloc(sizeof(char) * (count + 1));
+	if (!str)
+		return (NULL);
 	str[count] = '\0';
 	count--;
 	while (adr2 != 0)
@@ -66,9 +68,9 @@ static int no_accuracy(char *str, t_flags *flagi)
 
 int process_pointer(unsigned long adress, t_flags *flagi)
 {
-	int final_len;
-	int count = 0;
-	char *str;
+	int		final_len;
+	int		count = 0;
+	char	*str;
 
 	final_len = 0;
 	if (adress == 0)

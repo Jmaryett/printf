@@ -26,6 +26,7 @@ int handle_no_minus(char *str, t_flags *flagi)
 		ft_putchar(str[i]);
 		total_writen++;
 	}
+	//free (str);
 	return (total_writen);
 }
 
@@ -53,6 +54,7 @@ int minus_one(char *str, t_flags *flagi)
 			len++;
 		}
 	}
+	//free (str);
 	return (len);
 }
 

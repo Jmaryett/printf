@@ -104,10 +104,10 @@ int adding_width(t_flags *flagi, int str_len)
 	}
 	else
 	{
-		while (str_len < flagi->width)
+		while (flagi->width > 0)//str_len< flagi->width)
 		{
 			ft_putchar(' ');
-			str_len++;
+			flagi->width--;//str_len++;
 			len++;
 		}
 	}
