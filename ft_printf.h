@@ -19,6 +19,8 @@ typedef struct s_list
 } t_flags;
 
 int ft_printf(const char *format, ...);
+int	parse_t_flags(char *format, int i, t_flags *flagi, va_list arguments);
+int	thx_norms(char *format, va_list arguments, int length, t_flags *flagi);
 
 int check_digit(char *format, int i);
 int check_type(char *format, int i);
@@ -48,13 +50,13 @@ int u_no_minus_no_acc(t_flags *flagi, int str_len, int len);
 
 int handle_no_minus_int(t_flags *flagi, char *str, int nb);
 int no_minus_no_acc(t_flags *flagi, int str_len, int nb, int len);
-int no_minus_width_with_acc(t_flags *flagi, char *str, int nb, int str_len, int len);
+int no_minus_width_with_acc(t_flags *flagi, char *str, int nb, int str_len);
 int handle_width_with_minus(t_flags *flagi, char *str);
 int putstr_for_minus(t_flags *flagi, char *str, int str_len, int nb);
 int handle_minus(char *str, t_flags *flagi, int nb);
-int putstr_no_minus(t_flags *flagi, char *str, int str_len, int nb);
+int putstr_no_minus(t_flags *flagi, char *str, int str_len);
 int minus_one(char *str, t_flags *flagi);
-int handle_no_minus(char *str, t_flags *flagi);
+int handle_no_minus(char *str, t_flags *flagi, int str_len, int len);
 void ft_putchar(char c);
 int my_putstr(char *s, t_flags *flagi);
 

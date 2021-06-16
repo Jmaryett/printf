@@ -1,8 +1,8 @@
 #include "ft_printf.h"
 
-static char *no_adress(void)
+static	char	*no_address(void)
 {
-	char *s2;
+	char	*s2;
 
 	s2 = malloc(sizeof(char) * 2);
 	if (!s2)
@@ -12,15 +12,15 @@ static char *no_adress(void)
 	return (s2);
 }
 
-static char *adress_not_zero(unsigned long adress, int count)
+static char	*address_not_zero(unsigned long address, int count)
 {
-	char *str;
-	unsigned long adr2;
+	char			*str;
+	unsigned long	adr2;
 
-	adr2 = adress;
-	while (adress != 0)
+	adr2 = address;
+	while (address != 0)
 	{
-		adress = adress / 16;
+		address = address / 16;
 		count++;
 	}
 	str = malloc(sizeof(char) * (count + 1));
@@ -40,7 +40,7 @@ static char *adress_not_zero(unsigned long adress, int count)
 	return (str);
 }
 
-/* static int	handle_accuracy(char *str, t_flags *flagi)
+static int	no_accuracy(char *str, t_flags *flagi)
 {
 	int	len;
 
@@ -48,40 +48,25 @@ static char *adress_not_zero(unsigned long adress, int count)
 	if (flagi->minus == 1)
 		len = len + minus_one(str, flagi);
 	else
-		len = len + handle_no_minus(str, flagi);
-	free(str);
-	return (len);
-} */
-
-static int no_accuracy(char *str, t_flags *flagi)
-{
-	int len;
-
-	len = 0;
-	if (flagi->minus == 1)
-		len = len + minus_one(str, flagi);
-	else
-		len = len + handle_no_minus(str, flagi);
-	free(str);
+		len = len + handle_no_minus(str, flagi, ft_strlen(str), len);
 	return (len);
 }
 
-int process_pointer(unsigned long adress, t_flags *flagi)
+int	process_pointer(unsigned long address, t_flags *flagi)
 {
-	int final_len;
-	int count = 0;
-	char *str;
+	int		final_len;
+	int		count;
+	char	*str;
 
 	final_len = 0;
-	if (adress == 0)
-		str = no_adress(); //do i need to free it after?
+	count = 0;
+	if (address == 0)
+		str = no_address();
 	else
-		str = adress_not_zero(adress, count);
+		str = address_not_zero(address, count);
 	count = 0;
 	str = ft_strjoin("0x", str);
-	/* if (flagi->accuracy >= 0)
-		final_len = final_len + handle_accuracy(str, flagi);
-	else */
 	final_len = final_len + no_accuracy(str, flagi);
+	free (str);
 	return (final_len);
 }

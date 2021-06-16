@@ -1,16 +1,16 @@
 #include "ft_printf.h"
 
-int u_handle_no_minus_int(t_flags *flagi, char *str)
+int	u_handle_no_minus_int(t_flags *flagi, char *str)
 {
-	int len;
-	int str_len;
+	int	len;
+	int	str_len;
 
 	len = 0;
 	str_len = ft_strlen(str);
 	if (flagi->accuracy >= 0)
 	{
 		flagi->zero = 0;
-		len = u_no_minus_width_with_acc(flagi, str, str_len, len); //put width up to acc and then str
+		len = u_no_minus_width_with_acc(flagi, str, str_len, len);
 	}
 	else if (flagi->accuracy < 0)
 	{
@@ -20,9 +20,9 @@ int u_handle_no_minus_int(t_flags *flagi, char *str)
 	return (len);
 }
 
-static int count(unsigned int n)
+static int	count(unsigned int n)
 {
-	int len;
+	int	len;
 
 	len = 1;
 	{
@@ -35,7 +35,7 @@ static int count(unsigned int n)
 	return (len);
 }
 
-static char *fill_array(char *str, unsigned int n, int len)
+static char	*fill_array(char *str, unsigned int n, int len)
 {
 	if (n == 0)
 		str[0] = '0';
@@ -53,11 +53,11 @@ static char *fill_array(char *str, unsigned int n, int len)
 	return (str);
 }
 
-static char *itoa_for_uns_int(unsigned int n)
+static char	*itoa_for_uns_int(unsigned int n)
 {
-	char *str;
-	int sign;
-	int len;
+	char	*str;
+	int		sign;
+	int		len;
 
 	sign = 1;
 	len = count(n);
@@ -77,6 +77,7 @@ static char *itoa_for_uns_int(unsigned int n)
 	str = fill_array(str, n, len);
 	return (str);
 }
+
 int	process_uns_int(unsigned int nb, t_flags *flagi)
 {
 	char	*str;

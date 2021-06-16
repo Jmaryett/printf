@@ -14,7 +14,7 @@ void	analyze_minus(t_flags *flagi)
 	flagi->zero = 0;
 }
 
-int analyze_accuracy(char *format, int i, t_flags *flagi, va_list arg)
+int	analyze_accuracy(char *format, int i, t_flags *flagi, va_list arg)
 {
 	i++;
 	if (format[i] == '*')

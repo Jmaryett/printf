@@ -21,10 +21,11 @@ static int	type_hexa_thx_norms(char type, t_flags *flagi, va_list arg)
 
 static int	type_c_thx_norms(t_flags *flagi, va_list arg)
 {
-	int len;
+	int		len;
+	char	c;
 
 	len = 0;
-	char c = va_arg(arg, int);
+	c = va_arg(arg, int);
 	len = process_char(c, flagi);
 	return (len);
 }

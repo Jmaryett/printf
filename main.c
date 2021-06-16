@@ -4,8 +4,10 @@ int main()
 {
 	int len;
 	int p;
-	len = ft_printf("%p", 0);
+	len = ft_printf(" %-3.s ", NULL);
 	printf("\nMy length = %d\n", len);
-	p = printf("%p", 0);
+	p = printf(" %-3.s ", NULL);
 	printf("\nLen that should be = %d", p);
+
+	//while(1);
 }
