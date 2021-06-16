@@ -11,7 +11,7 @@ int	check_type(char *format, int i)
 {
 	if (format[i] == 'c' || format[i] == 'p' || format[i] == 'i'
 	|| format[i] == 's' || format[i] == 'd' || format[i] == 'u'
-	|| format[i] == 'x' || format[i] == 'X')
+	|| format[i] == 'x' || format[i] == 'X' || format[i] == '%')
 		return (1);
 	return (0);
 }

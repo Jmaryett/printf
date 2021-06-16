@@ -4,8 +4,8 @@ int main()
 {
 	int len;
 	int p;
-	len = ft_printf(" %p ", -1);
+	len = ft_printf("%p", 0);
 	printf("\nMy length = %d\n", len);
-	p = printf(" %p ", -1);
+	p = printf("%p", 0);
 	printf("\nLen that should be = %d", p);
 }

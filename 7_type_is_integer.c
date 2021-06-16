@@ -1,61 +1,12 @@
 #include "ft_printf.h"
 
-static int handle_width_with_minus(t_flags *flagi, char *str)
+int	putstr_no_minus(t_flags *flagi, char *str, int str_len, int nb)
 {
-	int len = 0;
+	int len;
+	int i;
 
-	while (flagi->width > 0)
-	{
-		ft_putchar(' ');
-		flagi->width--;
-		len++;
-	}
-	return (len);
-}
-
-static int putstr_for_minus(t_flags *flagi, char *str, int str_len, int nb)
-{
-	int i = 0;
-	int len = 0;
-
-	if (nb < 0)
-	{
-		ft_putchar('-');
-		len++;
-	}
-	if (flagi->accuracy > str_len)
-	{
-		while (str_len < flagi->accuracy)
-		{
-			ft_putchar('0');
-			str_len++;
-			len++;
-		}
-	}
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-		len++;
-	}
-	flagi->width -= len;
-	len = len + handle_width_with_minus(flagi, str);
-	return (len);
-}
-
-static int handle_minus(char *str, t_flags *flagi, int nb)
-{
-	int len = 0;
-	int str_len = ft_strlen(str);
-	flagi->zero = 0;
-	len = len + putstr_for_minus(flagi, str, str_len, nb);
-	return (len);
-}
-
-static int putstr_no_minus(t_flags *flagi, char *str, int str_len, int nb)
-{
-	int len = 0;
-	int i = 0;
+	len = 0;
+	i = 0;
 	if (flagi->accuracy > str_len)
 	{
 		while (str_len < flagi->accuracy)
@@ -74,10 +25,8 @@ static int putstr_no_minus(t_flags *flagi, char *str, int str_len, int nb)
 	return (len);
 }
 
-static int no_minus_width_with_acc(t_flags *flagi, char *str, int nb)
+int no_minus_width_with_acc(t_flags *flagi, char *str, int nb, int str_len, int len)
 {
-	int len = 0;
-	int str_len = ft_strlen(str);
 	if (flagi->accuracy < str_len)
 		flagi->accuracy = str_len;
 	if (nb < 0)
@@ -103,51 +52,59 @@ static int no_minus_width_with_acc(t_flags *flagi, char *str, int nb)
 	return (len);
 }
 
-static int handle_no_minus_int(t_flags *flagi, char *str, int nb)
+int no_minus_no_acc(t_flags *flagi, int str_len, int nb, int len)
 {
-	int len = 0;
-	int str_len = ft_strlen(str);
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		flagi->width--;
+		len++;
+	}
+	while (str_len < flagi->width)
+	{
+		if (flagi->zero == 1)
+		{
+			ft_putchar('0');
+			str_len++;
+			len++;
+		}
+		else if (flagi->zero == 0)
+		{
+			ft_putchar(' ');
+			str_len++;
+			len++;
+		}
+	}
+	return (len);
+}
 
+int handle_no_minus_int(t_flags *flagi, char *str, int nb)
+{
+	int len;
+	int str_len;
+
+	len = 0;
+	str_len = ft_strlen(str);
 	if (flagi->accuracy >= 0)
 	{
 		flagi->zero = 0;
-		len = len + no_minus_width_with_acc(flagi, str, nb); //put width up to acc and then str
+		len = no_minus_width_with_acc(flagi, str, nb, str_len, len); //put width up to acc and then str
 	}
 	else if (flagi->accuracy < 0)
 	{
-		//put width (with zero or not) up to str_len and then putstr
-		if (nb < 0)
-		{
-			ft_putchar('-');
-			flagi->width--;
-			len++;
-		}
-		while (str_len < flagi->width)
-		{
-			if (flagi->zero == 1)
-			{
-				ft_putchar('0');
-				str_len++;
-				len++;
-			}
-			else if (flagi->zero == 0)
-			{
-				ft_putchar(' ');
-				str_len++;
-				len++;
-			}
-		}
+		len = no_minus_no_acc(flagi, str_len, nb, len);
 		len = len + putstr_no_minus(flagi, str, str_len, nb);
 	}
 	return (len);
 }
 
-int process_integer(int nb, t_flags *flagi)
+int	process_integer(int nb, t_flags *flagi)
 {
-	int len;
-	char *str;
-	int nb2 = nb;
-
+	int		len;
+	char	*str;
+	int		nb2;
+	
+	nb2 = nb;
 	len = 0;
 	if (nb == 0 && flagi->accuracy == 0)
 	{

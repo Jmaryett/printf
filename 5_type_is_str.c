@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int handle_no_minus(char *str, t_flags *flagi)
+int	handle_no_minus(char *str, t_flags *flagi)
 {
 	int len;
 	int i;
@@ -26,13 +26,12 @@ int handle_no_minus(char *str, t_flags *flagi)
 		ft_putchar(str[i]);
 		total_writen++;
 	}
-	//free (str);
 	return (total_writen);
 }
 
-int minus_one(char *str, t_flags *flagi)
+int	minus_one(char *str, t_flags *flagi)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(str);
 	if (flagi->accuracy >= 0)
@@ -54,7 +53,6 @@ int minus_one(char *str, t_flags *flagi)
 			len++;
 		}
 	}
-	//free (str);
 	return (len);
 }
 

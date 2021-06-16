@@ -40,9 +40,9 @@ static char *adress_not_zero(unsigned long adress, int count)
 	return (str);
 }
 
-static int handle_accuracy(char *str, t_flags *flagi)
+/* static int	handle_accuracy(char *str, t_flags *flagi)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (flagi->minus == 1)
@@ -51,7 +51,7 @@ static int handle_accuracy(char *str, t_flags *flagi)
 		len = len + handle_no_minus(str, flagi);
 	free(str);
 	return (len);
-}
+} */
 
 static int no_accuracy(char *str, t_flags *flagi)
 {
@@ -68,20 +68,20 @@ static int no_accuracy(char *str, t_flags *flagi)
 
 int process_pointer(unsigned long adress, t_flags *flagi)
 {
-	int		final_len;
-	int		count = 0;
-	char	*str;
+	int final_len;
+	int count = 0;
+	char *str;
 
 	final_len = 0;
 	if (adress == 0)
-		str = no_adress();
+		str = no_adress(); //do i need to free it after?
 	else
 		str = adress_not_zero(adress, count);
 	count = 0;
 	str = ft_strjoin("0x", str);
-	if (flagi->accuracy >= 0)
+	/* if (flagi->accuracy >= 0)
 		final_len = final_len + handle_accuracy(str, flagi);
-	else
-		final_len = final_len + no_accuracy(str, flagi);
+	else */
+	final_len = final_len + no_accuracy(str, flagi);
 	return (final_len);
 }

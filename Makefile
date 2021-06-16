@@ -9,15 +9,20 @@ NAME = libftprintf.a
 HEADER	= ft_printf.h \
 
 SRCS	= ft_printf.c \
-		ft_printf_add.c \
-		int_add_func.c \
+		add_func_c_s_p_percent.c \
+		add_func_d_i.c \
+		add_func_u_x_X.c \
+		add_func_u_x_X_2.c \
 		1_checking_symbols_for_flags.c \
 		2_analyzing_flags.c \
 		3_analyze_type.c \
 		4_type_is_char.c \
 		5_type_is_str.c \
 		6_type_is_pointer.c \
-		7_type_is_integer.c 
+		7_type_is_integer.c \
+		8_type_is_u.c \
+		9_type_is_x_X.c \
+		10_type_is_percent.c
 
 OBJS	= ${SRCS:.c=.o}
 
@@ -56,7 +61,7 @@ fclean:	clean
 		${RM} ${LIBFT_A}
 		
 test:	${LIBFT_A}
-		${CC} -o -g main.c ${SRCS} ${LIBFT_A}
+		${CC} -g main.c ${SRCS} ${LIBFT_A}
 		${RM} ${OBJS} ${LIBFT_A} ${NAME}
 
 re:		fclean all
