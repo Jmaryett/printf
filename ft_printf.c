@@ -10,7 +10,7 @@ static void	init_t_flags(t_flags *flagi)
 	flagi->star = 0;
 }
 
-int	parse_t_flags(char *format, int i, t_flags *flagi, va_list arguments)
+static int	parse_t_flags(char *format, int i, t_flags *flagi, va_list arg)
 {
 	while (format[i])
 	{
@@ -20,11 +20,11 @@ int	parse_t_flags(char *format, int i, t_flags *flagi, va_list arguments)
 		if (format[i] == '0')
 			i = we_met_zero(format, i, flagi);
 		if (format[i] == '.')
-			i = analyze_accuracy(format, i, flagi, arguments);
+			i = analyze_accuracy(format, i, flagi, arg);
 		if (format[i] == '-')
 			analyze_minus(flagi);
 		if (format[i] == '*')
-			analyze_width(arguments, flagi);
+			analyze_width(arg, flagi);
 		if (format[i] >= '0' && format[i] <= '9')
 			analyze_width_2(format[i], flagi);
 		if (format[i] == 'c' || format[i] == 's' || format[i] == 'p'
@@ -39,7 +39,7 @@ int	parse_t_flags(char *format, int i, t_flags *flagi, va_list arguments)
 	return (i);
 }
 
-int	thx_norms(char *format, va_list arguments, int length, t_flags *flagi)
+static int	thx_norms(char *format, va_list arg, int length, t_flags *flagi)
 {
 	int	i;
 
@@ -54,9 +54,9 @@ int	thx_norms(char *format, va_list arguments, int length, t_flags *flagi)
 				ft_putchar(' ');
 				length++;
 			}
-			i = parse_t_flags(format, i, flagi, arguments);
+			i = parse_t_flags(format, i, flagi, arg);
 			if (flagi->type != 'o')
-				length = length + process_types(format[i], flagi, arguments);
+				length = length + process_types(format[i], flagi, arg);
 		}
 		else if (format[i] != '%')
 		{

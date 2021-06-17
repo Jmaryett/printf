@@ -40,7 +40,7 @@ static char	*address_not_zero(unsigned long address, int count)
 	return (str);
 }
 
-static int	no_accuracy(char *str, t_flags *flagi)
+static int	no_accuracy(char *str, t_flags *flagi, int address)
 {
 	int	len;
 
@@ -52,6 +52,21 @@ static int	no_accuracy(char *str, t_flags *flagi)
 	return (len);
 }
 
+static int	ad_acc_nul(t_flags *flagi)
+{
+	char	*str;
+	int		len;
+
+	len = 0;
+	str = ft_strdup("0x");
+	if (flagi->minus == 1)
+		len = len + no_add_acc_with_min(str, flagi);
+	else if (flagi->minus == 0)
+		len = len + no_ad_acc_minus_p(str, flagi, 2, len);
+	free (str);
+	return (len);
+}
+
 int	process_pointer(unsigned long address, t_flags *flagi)
 {
 	int		final_len;
@@ -60,13 +75,18 @@ int	process_pointer(unsigned long address, t_flags *flagi)
 
 	final_len = 0;
 	count = 0;
-	if (address == 0)
+	if (address == 0 && flagi->accuracy == 0)
+	{
+		final_len = final_len + ad_acc_nul(flagi);
+		return (final_len);
+	}
+	else if (address == 0 && flagi->accuracy != 0)
 		str = no_address();
 	else
 		str = address_not_zero(address, count);
 	count = 0;
 	str = ft_strjoin("0x", str);
-	final_len = final_len + no_accuracy(str, flagi);
+	final_len = final_len + no_accuracy(str, flagi, address);
 	free (str);
 	return (final_len);
 }
