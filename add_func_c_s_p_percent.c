@@ -1,14 +1,14 @@
 #include "ft_printf.h"
 
-void ft_putchar(char c)
+void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
 
-int my_putstr(char *s, t_flags *flagi)
+int	my_putstr(char *s, t_flags *flagi)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	len = 0;
 	i = 0;

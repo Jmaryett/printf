@@ -2,8 +2,8 @@
 
 static int	per_putstr_no_minus(t_flags *flagi, char *str, int str_len)
 {
-	int len;
-	int i;
+	int	len;
+	int	i;
 
 	len = 0;
 	i = 0;
@@ -25,7 +25,7 @@ static int	per_putstr_no_minus(t_flags *flagi, char *str, int str_len)
 	return (len);
 }
 
-static int	per_no_minus_width_with_acc(t_flags *flagi, char *str, int str_len, int len)
+static int	per_min_acc_no(t_flags *flagi, char *str, int str_len, int len)
 {
 	if (flagi->accuracy < str_len)
 		flagi->accuracy = str_len;
@@ -70,15 +70,15 @@ static int	per_no_minus_no_acc(t_flags *flagi, int str_len, int len)
 
 static int	per_handle_no_minus(char *str, t_flags *flagi)
 {
-	int len;
-	int str_len;
+	int	len;
+	int	str_len;
 
 	len = 0;
 	str_len = ft_strlen(str);
 	if (flagi->accuracy >= 0)
 	{
 		flagi->zero = 0;
-		len = per_no_minus_width_with_acc(flagi, str, str_len, len); //put width up to acc and then str
+		len = per_min_acc_no(flagi, str, str_len, len);
 	}
 	else if (flagi->accuracy < 0)
 	{
@@ -88,10 +88,9 @@ static int	per_handle_no_minus(char *str, t_flags *flagi)
 	return (len);
 }
 
-int process_percent(t_flags *flagi)
+int	process_percent(t_flags *flagi)
 {
-	int len;
-	char *str;
+	int		len;
 
 	len = 0;
 	if (flagi->minus == 1)

@@ -63,13 +63,24 @@ static int	nb_acc_nul(t_flags *flagi)
 
 	len = 0;
 	str = ft_strdup("");
-	len = u_handle_width_with_minus(flagi, str);
+	len = u_handle_width_with_minus(flagi);
 	len = len + u_putstr_for_minus(flagi, str, ft_strlen(str));
 	free(str);
 	return (len);
 }
 
-static int	check_
+static int	minus(t_flags *flagi, char *str)
+{
+	int	len;
+
+	len = 0;
+	if (flagi->minus == 1)
+		len = len + u_handle_minus(str, flagi);
+	else if (flagi->minus == 0)
+		len = len + u_handle_no_minus_int(flagi, str);
+	free (str);
+	return (len);
+}
 
 int	process_hexa(unsigned int nb, t_flags *flagi, int capitals)
 {
@@ -78,8 +89,9 @@ int	process_hexa(unsigned int nb, t_flags *flagi, int capitals)
 	int				count;
 	unsigned long	nb2;
 
-	len = 0;
+	str = NULL;
 	count = 0;
+	len = 0;
 	if (nb < 0)
 		nb += 4294967295 + 1;
 	if (nb == 0 && flagi->accuracy == 0)
@@ -95,10 +107,6 @@ int	process_hexa(unsigned int nb, t_flags *flagi, int capitals)
 	else if (capitals == 1 && nb2 != 0)
 		str = nb_not_zero_upp(nb2, count);
 	count = 0;
-	if (flagi->minus == 1)
-		len = len + u_handle_minus(str, flagi);
-	else if (flagi->minus == 0)
-		len = len + u_handle_no_minus_int(flagi, str);
-	free(str);
+	len = len + minus(flagi, str);
 	return (len);
 }

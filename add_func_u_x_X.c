@@ -1,9 +1,10 @@
 #include "ft_printf.h"
 
-int u_handle_width_with_minus(t_flags *flagi, char *str)
+int	u_handle_width_with_minus(t_flags *flagi)
 {
-	int len = 0;
+	int	len;
 
+	len = 0;
 	while (flagi->width > 0)
 	{
 		ft_putchar(' ');
@@ -27,7 +28,7 @@ static int	u_acc_more_than_strlen(t_flags *flagi, int str_len)
 	return (len);
 }
 
-int u_putstr_for_minus(t_flags *flagi, char *str, int str_len)
+int	u_putstr_for_minus(t_flags *flagi, char *str, int str_len)
 {
 	int	i;
 	int	len;
@@ -43,14 +44,17 @@ int u_putstr_for_minus(t_flags *flagi, char *str, int str_len)
 		len++;
 	}
 	flagi->width -= len;
-	len = len + u_handle_width_with_minus(flagi, str);
+	len = len + u_handle_width_with_minus(flagi);
 	return (len);
 }
 
-int u_handle_minus(char *str, t_flags *flagi)
+int	u_handle_minus(char *str, t_flags *flagi)
 {
-	int len = 0;
-	int str_len = ft_strlen(str);
+	int	len;
+	int	str_len;
+
+	len = 0;
+	str_len = ft_strlen(str);
 	flagi->zero = 0;
 	len = len + u_putstr_for_minus(flagi, str, str_len);
 	return (len);

@@ -25,12 +25,10 @@ static int	count(unsigned int n)
 	int	len;
 
 	len = 1;
+	while (n > 9)
 	{
-		while (n > 9)
-		{
-			n = n / 10;
-			len++;
-		}
+		n = n / 10;
+		len++;
 	}
 	return (len);
 }
@@ -89,7 +87,7 @@ int	process_uns_int(unsigned int nb, t_flags *flagi)
 	if (nb == 0 && flagi->accuracy == 0)
 	{
 		str = ft_strdup("");
-		len = u_handle_width_with_minus(flagi, str);
+		len = u_handle_width_with_minus(flagi);
 		len = len + u_putstr_for_minus(flagi, str, ft_strlen(str));
 		free(str);
 		return (len);

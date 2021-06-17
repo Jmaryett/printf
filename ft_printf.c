@@ -71,7 +71,6 @@ int	thx_norms(char *format, va_list arguments, int length, t_flags *flagi)
 static int	parse_input(char *format, va_list arguments)
 {
 	int		length;
-	int		i;
 	t_flags	flagi;
 
 	length = 0;

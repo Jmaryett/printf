@@ -61,7 +61,7 @@ fclean:	clean
 		${RM} ${LIBFT_A}
 		
 test:	${LIBFT_A}
-		${CC} -g main.c ${SRCS} ${LIBFT_A}
+		${CC} -g ${CFLAGS} main.c ${SRCS} ${LIBFT_A}
 		${RM} ${OBJS} ${LIBFT_A} ${NAME}
 
 re:		fclean all

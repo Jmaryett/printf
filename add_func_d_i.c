@@ -1,8 +1,8 @@
 #include "ft_printf.h"
 
-int handle_width_with_minus(t_flags *flagi, char *str) //no need for str
+int	handle_width_with_minus(t_flags *flagi)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (flagi->width > 0)
@@ -14,9 +14,9 @@ int handle_width_with_minus(t_flags *flagi, char *str) //no need for str
 	return (len);
 }
 
-static int acc_more_than_strlen(t_flags *flagi, int str_len)
+static int	acc_more_than_strlen(t_flags *flagi, int str_len)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (str_len < flagi->accuracy)
@@ -28,10 +28,10 @@ static int acc_more_than_strlen(t_flags *flagi, int str_len)
 	return (len);
 }
 
-int putstr_for_minus(t_flags *flagi, char *str, int str_len, int nb)
+int	putstr_for_minus(t_flags *flagi, char *str, int str_len, int nb)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	i = 0;
 	len = 0;
@@ -49,14 +49,14 @@ int putstr_for_minus(t_flags *flagi, char *str, int str_len, int nb)
 		len++;
 	}
 	flagi->width -= len;
-	len = len + handle_width_with_minus(flagi, str);
+	len = len + handle_width_with_minus(flagi);
 	return (len);
 }
 
-int handle_minus(char *str, t_flags *flagi, int nb)
+int	handle_minus(char *str, t_flags *flagi, int nb)
 {
-	int len;
-	int str_len;
+	int	len;
+	int	str_len;
 
 	str_len = ft_strlen(str);
 	len = 0;

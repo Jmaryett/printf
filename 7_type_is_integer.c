@@ -114,7 +114,7 @@ int	process_integer(int nb, t_flags *flagi)
 	if (nb == 0 && flagi->accuracy == 0)
 	{
 		str = ft_strdup("");
-		len = handle_width_with_minus(flagi, str);
+		len = handle_width_with_minus(flagi);
 		len = len + putstr_for_minus(flagi, str, ft_strlen(str), nb2);
 		free(str);
 		return (len);

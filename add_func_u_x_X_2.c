@@ -1,9 +1,9 @@
 #include "ft_printf.h"
 
-int u_putstr_no_minus(t_flags *flagi, char *str, int str_len)
+int	u_putstr_no_minus(t_flags *flagi, char *str, int str_len)
 {
-	int len;
-	int i;
+	int	len;
+	int	i;
 
 	len = 0;
 	i = 0;
@@ -25,7 +25,7 @@ int u_putstr_no_minus(t_flags *flagi, char *str, int str_len)
 	return (len);
 }
 
-int u_no_minus_width_with_acc(t_flags *flagi, char *str, int str_len, int len)
+int	u_no_minus_width_with_acc(t_flags *flagi, char *str, int str_len, int len)
 {
 	if (flagi->accuracy < str_len)
 		flagi->accuracy = str_len;
@@ -49,7 +49,7 @@ int u_no_minus_width_with_acc(t_flags *flagi, char *str, int str_len, int len)
 	return (len);
 }
 
-int u_no_minus_no_acc(t_flags *flagi, int str_len, int len)
+int	u_no_minus_no_acc(t_flags *flagi, int str_len, int len)
 {
 	while (str_len < flagi->width)
 	{
