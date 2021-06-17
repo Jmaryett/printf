@@ -2,4 +2,10 @@
 *.exe
 .DS_Storepft_2019/
 pft/
-pft/
+.DS_Store
+printf-tester/
+printfTester/
+42TESTERS-PRINTF/
+old_printf/
+.vscode/
+a.out.dSYM/

@@ -66,7 +66,4 @@ test:	${LIBFT_A}
 
 re:		fclean all
 
-#bonus: ${OBJS2} ${HEADER}
-#		${AR} ${NAME} $^
-
-.PHONY: re clean fclean all 
+.PHONY: re clean fclean all test compile_libft
