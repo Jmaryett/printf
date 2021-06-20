@@ -25,7 +25,7 @@ int	u_putstr_no_minus(t_flags *flagi, char *str, int str_len)
 	return (len);
 }
 
-int	u_no_minus_width_with_acc(t_flags *flagi, char *str, int str_len, int len)
+int	u_no_min_wid_with_ac(t_flags *flagi, char *str, int str_len, int len)
 {
 	if (flagi->accuracy < str_len)
 		flagi->accuracy = str_len;

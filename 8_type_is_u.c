@@ -10,7 +10,7 @@ int	u_handle_no_minus_int(t_flags *flagi, char *str)
 	if (flagi->accuracy >= 0)
 	{
 		flagi->zero = 0;
-		len = u_no_minus_width_with_acc(flagi, str, str_len, len);
+		len = u_no_min_wid_with_ac(flagi, str, str_len, len);
 	}
 	else if (flagi->accuracy < 0)
 	{

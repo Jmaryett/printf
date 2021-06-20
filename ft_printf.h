@@ -8,7 +8,7 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 
-typedef struct	s_list
+typedef struct s_list
 {
 	char	type;
 	int		width;
@@ -54,7 +54,7 @@ int		u_handle_width_with_minus(t_flags *flagi);
 int		u_putstr_for_minus(t_flags *flagi, char *str, int str_len);
 int		u_handle_minus(char *str, t_flags *flagi);
 int		u_putstr_no_minus(t_flags *flagi, char *str, int str_len);
-int		u_no_minus_width_with_acc(t_flags *flagi, char *str, int str_len, int len);
+int		u_no_min_wid_with_ac(t_flags *flagi, char *str, int str_len, int len);
 int		u_no_minus_no_acc(t_flags *flagi, int str_len, int len);
 
 int		putstr_no_minus(t_flags *flagi, char *str, int str_len);

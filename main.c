@@ -4,10 +4,10 @@ int main()
 {
 	int len;
 	int p;
-	len = ft_printf("%s", NULL, "%d", NULL, "%p", NULL, "%%", NULL, "%c", NULL, "%x", NULL, "%X", NULL, "%u", NULL);
+	len = ft_printf("%9.2p", 1234);
 	printf("\nMy length = %d\n", len);
-	p = printf("%s", NULL, "%d", NULL, "%p", NULL, "%%", NULL, "%c", NULL, "%x", NULL, "%X", NULL, "%u", NULL);
+	p = printf("%9.2p", 1234);
 	printf("\nLen that should be = %d", p);
 
-	//while(1);
+	return (0);
 }
