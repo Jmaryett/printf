@@ -76,4 +76,7 @@ re:		fclean all
 bonus: ${OBJS2}
 		${AR} ${NAME} $^
 
-.PHONY: re clean fclean all 
+norm:
+		norminette ${SRCS} ${HEADER}
+
+.PHONY: re clean fclean all bonus norm

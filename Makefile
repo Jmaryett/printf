@@ -44,7 +44,7 @@ compile_libft: ${LIBFT_A}
 ${LIBFT_A}:
 			cd ./libft; \
 			make; \
-			cp $(LIBA) ../; \
+			cp ${LIBA} ../; \
 			make clean; \
 			cd ..;
 			mv ${LIBA} ${NAME}

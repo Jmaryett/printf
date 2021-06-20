@@ -44,7 +44,7 @@ static	char	*fill_array(char *str, long n, long len)
 
 char	*ft_itoa(long n)
 {
-	char	*str;
+	char		*str;
 	long		sign;
 	long		len;
 
