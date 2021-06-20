@@ -62,7 +62,7 @@ static char	*itoa_for_uns_int(unsigned int n)
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-	if (n == -2147483647 - 1)
+	if (n == 2147483648)
 	{
 		ft_strlcpy(str, "2147483648", sizeof("2147483648"));
 		return (str);

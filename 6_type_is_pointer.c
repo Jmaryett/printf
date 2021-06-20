@@ -40,7 +40,7 @@ static char	*address_not_zero(unsigned long address, int count)
 	return (str);
 }
 
-static int	no_accuracy(char *str, t_flags *flagi, int address)
+static int	no_accuracy(char *str, t_flags *flagi)
 {
 	int	len;
 
@@ -86,7 +86,7 @@ int	process_pointer(unsigned long address, t_flags *flagi)
 		str = address_not_zero(address, count);
 	count = 0;
 	str = ft_strjoin("0x", str);
-	final_len = final_len + no_accuracy(str, flagi, address);
+	final_len = final_len + no_accuracy(str, flagi);
 	free (str);
 	return (final_len);
 }

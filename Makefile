@@ -35,7 +35,7 @@ CFLAGS 	= -Wall -Wextra -Werror
 LIBA = libft.a
 
 .c.o:
-	${CC} -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 all: ${NAME}
 
